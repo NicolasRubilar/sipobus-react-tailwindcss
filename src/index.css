@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Montserrat Variable", "Poppins", ui-sans-serif, system-ui, sans-serif;
+
+  /* Azules del logo de SipoBus */
+  --color-brand-200: #bfe0fb;
+  --color-brand-300: #8cc8f5;
+  --color-brand-400: #5eaeea;
+  --color-brand-500: #3b93d9;
+  --color-brand-600: #1f6fb8;
+  --color-brand-700: #0b4a8b;
+
+  /* Fondo nocturno */
+  --color-ink-950: #070b12;
+  --color-ink-900: #0c121c;
+  --color-ink-800: #141c29;
+
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply min-h-dvh bg-ink-950 font-sans text-white antialiased;
+  }
+
+  ::selection {
+    @apply bg-brand-400/40;
+  }
+
+  /* El calendario/reloj nativo en blanco sobre fondo oscuro */
+  input[type="date"]::-webkit-calendar-picker-indicator,
+  input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    opacity: 0.6;
+    cursor: pointer;
+  }
+}
+
+@utility glass {
+  @apply border border-white/10 bg-white/[0.06] backdrop-blur-xl;
+}
+
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition duration-200 select-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-300 active:scale-[0.97] disabled:pointer-events-none disabled:opacity-50;
+}
+
+@utility btn-primary {
+  @apply bg-gradient-to-r from-brand-300 to-brand-500 text-ink-950 shadow-lg shadow-brand-500/25 hover:brightness-110;
+}
+
+@utility btn-ghost {
+  @apply border border-white/15 bg-white/5 text-white hover:bg-white/10;
+}
+
+@utility btn-danger {
+  @apply bg-red-500/90 text-white hover:bg-red-500;
+}
+
+@utility field {
+  @apply w-full rounded-xl border border-white/10 bg-ink-900/70 px-4 py-3 text-base text-white placeholder:text-white/35 transition outline-none focus:border-brand-400 focus:ring-2 focus:ring-brand-400/30 sm:text-sm;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
